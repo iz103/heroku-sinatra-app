@@ -43,6 +43,7 @@ post '/form' do
   params[:q] = params[:q].gsub(/\s/, '+')
   search = Google.new(params[:q])
   @results = search.response
+  # binding.pry
   erb :results
 end
 

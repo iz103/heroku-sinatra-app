@@ -6,14 +6,17 @@
     <tr>
       <th> </th><th>Title</th><th>Price (AU Dollars)</th>
     </tr>
-
-      <% @results["items"].each do |item| %>
-        <tr>
-          <td><img src=<%= item["product"]["images"][0]["link"]%> alt="Smiley face" height="42" width="42" /> </td>
-          <td><%= item["product"]["title"] %></td>
-          <td><%= item["product"]["inventories"][0]["price"] %></td>
-        </tr>
-      <% end  %>
+      <% if @results == nil || @results["items"] == nil %>
+        <h3>No results found<h3>
+      <% else %>
+        <% @results["items"].each do |item| %>
+          <tr>
+            <td><img src=<%= item["product"]["images"][0]["link"]%> alt="Smiley face" height="42" width="42" /> </td>
+            <td><%= item["product"]["title"] %></td>
+            <td><%= sprintf('%.2f',item["product"]["inventories"][0]["price"]) %></td>
+          </tr>
+        <% end  %>
+      <% end %>
   </table>
 
     
