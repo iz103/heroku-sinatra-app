@@ -35,8 +35,7 @@ class Google
 end
 # a["items"][0]["product"]["link"]
 
-get '/' do
-  # binding.pry 
+get '/' do 
   erb :form
 end
 
