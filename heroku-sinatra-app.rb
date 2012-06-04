@@ -7,6 +7,9 @@
 #
 require 'rubygems'
 require 'sinatra'
+require 'rest_client'
+require 'pry'
+require 'json'
 
 configure :production do
   # Configure stuff here you'll want to
@@ -16,11 +19,34 @@ configure :production do
   #       from ENV['DATABASE_URI'] (see /env route below)
 end
 
+# format :json
 # Quick test
-get '/' do
-  "Congradulations!
-   You're running a Sinatra application on Heroku!"
+
+class Google
+  def initialize(query)
+    @query = query
+  end
+  
+  def response
+      key = 'AIzaSyBEMGBPjHVqlfSZH2-ppPhRo0wHX6hLKT8'
+      url = "https://www.googleapis.com/shopping/search/v1/public/products?country=AU&q=vintage+decor+#{@query}&rankBy=price:ascending&key=#{key}"
+      products = JSON.parse(RestClient.get(url))
+  end
 end
+# a["items"][0]["product"]["link"]
+
+get '/' do
+  # binding.pry 
+  erb :form
+end
+
+post '/form' do
+  params[:q] = params[:q].gsub(/\s/, '+')
+  search = Google.new(params[:q])
+  @results = search.response
+  erb :results
+end
+
 
 # Test at <appname>.heroku.com
 

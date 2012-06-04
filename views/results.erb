@@ -1,0 +1,18 @@
+<html>
+  <table border="0" cellspacing="5" cellpadding="5">
+    <tr>
+      <th> </th><th>Title</th><th>Price (AU Dollars)</th>
+    </tr>
+
+      <% @results["items"].each do |item| %>
+        <tr>
+          <td><img src=<%= item["product"]["images"][0]["link"]%> alt="Smiley face" height="42" width="42" /> </td>
+          <td><%= item["product"]["title"] %></td>
+          <td><%= item["product"]["inventories"][0]["price"] %></td>
+        </tr>
+      <% end  %>
+  </table>
+
+    
+
+</html>
