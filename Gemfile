@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-gem 'sinatra'
+# gem 'sinatra'
 gem 'rack'
 gem 'haml'
 gem 'httparty'
